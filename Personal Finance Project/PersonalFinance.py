@@ -97,7 +97,7 @@ def findCategory(ammount, description):
 def pushData(csvfilepath, month):
 
     
-    gc = gspread.service_account(filename="/Users/carsonbrown/Desktop/personalfinance-414419-0fcf8ca5625b.json")
+    gc = gspread.service_account()
     
 
     sh = gc.open("Personal Finances")
