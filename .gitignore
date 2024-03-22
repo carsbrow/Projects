@@ -1,2 +1,3 @@
-/Users/carsonbrown/Desktop/CS Projects/Projects/Overdose Map/mort2022ps.zip
-/Users/carsonbrown/Desktop/CS Projects/Projects/Overdose Map/mort2022us.zip
+# Ignore macOS .DS_Store files
+.DS_Store
+
