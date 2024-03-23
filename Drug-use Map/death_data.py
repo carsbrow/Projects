@@ -1,11 +1,8 @@
 
 import pandas as pd
-import numpy as np 
-import drugs
+import numpy as np
 
-drug_data = drugs.get_report()
+overdose_data = pd.read_csv('Projects/Drug-use Map/VSRR_Provisional_Drug_Overdose_Death_Counts.csv')
+drug_data = pd.read_csv('Projects/Drug-use Map/drugs.csv')
 
-drug_data = pd.DataFrame(drug_data)
-
-drug_data.head().to_csv('/Users/carsonbrown/Desktop/CS Projects/Projects/Drug-use Map/drug_data_head.csv', index=False)
 
