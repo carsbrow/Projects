@@ -25,3 +25,5 @@ Data is aviailable for: (From 02/04/2019 - 02/02/2024)
     Bitcoin - Price & Volume
 
 Some fields are missing more data then others so graphs may vary in detail.
+
+Run using interactive mode or add a case to main and run the script.
