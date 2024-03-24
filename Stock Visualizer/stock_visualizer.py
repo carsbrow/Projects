@@ -53,8 +53,8 @@ def stock_visualizer(stock_name, start_date, end_date):
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8))
     
     # Line graph for price
-    stock_df[stock_name + '_Price'].fillna(0).replace(0, value=float('nan')).plot(kind='line', ax=ax1) 
-    stock_df_grouped[stock_name + '_Price'].fillna(0).replace(0, value=float('nan')).plot(kind='line', ax=ax1)
+    stock_df[stock_name + '_Price'].plot(kind='line', ax=ax1) 
+    stock_df_grouped[stock_name + '_Price'].plot(kind='line', ax=ax1)
     ax1.set_xlabel('Month')
     ax1.set_ylabel('Price')
     ax1.set_title(f'{stock_name} Stock Price by Month')
@@ -63,8 +63,9 @@ def stock_visualizer(stock_name, start_date, end_date):
     # Bar graph for monthy volume
     volume_comparison = stock_df_grouped[stock_name + '_Vol.'].diff()
     # List comprehension to color the bars based on the volume change
-    # Red if the volume decreased, Green if the volume increased
-    stock_df_grouped[stock_name + '_Vol.'].fillna(0).replace(0, value=float('nan')).plot(kind='bar', ax=ax2, width=1, edgecolor='black', color=['g' if vol > 0 else 'r' for vol in volume_comparison])
+    stock_df_grouped[stock_name + '_Vol.'].plot(kind='bar', ax=ax2, width=1, edgecolor='black', color=[
+        'g' if vol > 0 else 'r' for vol in volume_comparison]) # Red if the volume decreased, Green if the volume increased
+    
     ax2.set_xlabel('Month')
     ax2.set_ylabel('Volume')
     ax2.set_title(f'{stock_name} Stock Volume by Month')
