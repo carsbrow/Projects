@@ -2,8 +2,7 @@
 A python script using pandas and matplotlib to visualize the stock data on a graph
 
 Data is aviailable for: (From 02/04/2019 - 02/02/2024)
-> Data set is from kaggle, "2019-2024 US Stock Market Data" 
- >   https://www.kaggle.com/datasets/saketk511/2019-2024-us-stock-market-data
+> Data set is from kaggle, [[2019-2024 US Stock Market Data]](https://www.kaggle.com/datasets/saketk511/2019-2024-us-stock-market-data)
 
     Meta - Price & Volume
     Amazon - Price & Volume
