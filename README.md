@@ -2,10 +2,10 @@
 ## A collection of my finished and unfinished personal coding projects
 
 ### Finished
-  Persnal Finance Project
-  Stock Visualizer Project
+  - Persnal Finance
+  - Stock Visualizer
 
 
 ### Unfinished
-  Drug-use Map
-  Book Recommender
+  - Drug-use Map
+  - Book Recommender
