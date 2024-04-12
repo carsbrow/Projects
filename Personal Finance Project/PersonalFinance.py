@@ -141,3 +141,11 @@ def push_data(csv_file_path, month):
             wks.format(f"B{row}", {"backgroundColor": {"red": 1.0, "green": 0.0, "blue": 0.0}})
         
         row += 1
+
+
+def main():
+    push_data("transactions.csv", "June")
+
+
+if __name__ == "__main__":
+    main()
