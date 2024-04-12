@@ -10,11 +10,11 @@ def spendingData(file_path):
     allTransactions = []
     
     with open(file_path, "r") as file:
-        for line in file:
+        for line in file: # Creating a list of Transaction objects to later add to a Google Sheets spreadsheet
             temp = line[0:-12]  # Removing unnecessary information
             data = temp.strip().replace('"', '').split(",")
 
-            transacDay = data[0]
+            transacDay = data[0] 
             transacAmount = float(data[1])
             transacType = find_type(data[4])
             transacDescription = find_description(data[4])
