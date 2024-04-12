@@ -5,7 +5,15 @@ from TransactionClass import Transaction
 
 
 def spendingData(file_path):
-    """Reads transaction data from a CSV file"""
+    """Reads transaction data from a CSV file
+
+        Parameters:
+            file_path (str): The path to the CSV file containing transaction data
+    
+        Returns:
+            list: A list of Transaction objects
+    
+    """
     
     allTransactions = []
     
@@ -45,7 +53,14 @@ def find_type(descriptionString):
 
 
 def find_description(descriptionString):
-    """Extracts the description from the bank's description string"""
+    """Extracts the description from the bank's description string
+    
+        Parameters:
+            descriptionString (str): The transaction's entire description string
+            
+        Returns:
+            str: The transaction's specific description
+    """
     
     pattern = r'ON \d{1,2}/\d{1,2} (.+?) \w{1}\d{6,}'  # Pattern recognizes the date and concludes at routing number
 
@@ -53,22 +68,30 @@ def find_description(descriptionString):
 
     if match:
         description = match.group(1)
-    elif "TRANSFER" in descriptionString:
+    elif "TRANSFER" in descriptionString: # Cannot reconize a transfer with RE so manually set description
         description = "Money Transfer"
     else:
-        description = ""
+        description = "" # If no match is found, return an empty string
 
     return description
 
 
 def find_category(amount, description):
-    """Categorizes transactions based on amount and description"""
+    """Categorizes transactions based on amount and description
+    
+        Parameters:
+            amount (float): The transaction's amount to check if it's an income or expense
+            description (str): The transaction's description, description from find_description()
+            
+        Returns:
+            str: The transaction's category
+    """
     
     lower_descr = description.lower()
     
     food_keywords = ["mcdon", "taco", "lao", "chick-fil", "chipotle", "starbucks", "coffee", "food", "qdoba", 
                      "hyve", "target", "walm", "d.p.", "brueg", "walg", "crisp", "noodles", "korean", "nashville", 
-                     "afro deli", "sandwich", "bonchon", "culver"]
+                     "afro deli", "sandwich", "bonchon", "culver"] # Keywords to identify food transactions
     
     transport_keywords = ["gas", "train", "metro", "light rail", "transit", "transport"]
 
@@ -76,7 +99,7 @@ def find_category(amount, description):
 
     loans_keywords = []
 
-    if amount > 0:
+    if amount > 0: # Assigns a category based on the transaction's amount and description
         return "Income"
     elif any(keyword in lower_descr for keyword in food_keywords):
         return "Food"
@@ -91,20 +114,28 @@ def find_category(amount, description):
 
 
 def push_data(csv_file_path, month):
-    """Pushes transaction data to a Google Sheets spreadsheet"""
+    """Pushes transaction data to a Google Sheets spreadsheet using gspread
     
-    gc = gspread.service_account()
-    sh = gc.open("Personal Finances")
-    wks = sh.worksheet(month)
+        Parameters:
+            csv_file_path (str): The path to the CSV file containing transaction data
+            month (str): The month to push the data to in the Google Sheets spreadsheet
+            
+        Returns:
+            None
+    """
+    
+    gc = gspread.service_account() # Connecting to the API with key on local machine
+    sh = gc.open("Personal Finances") # Name of the google sheet
+    wks = sh.worksheet(month) # Opening the correct tab of the sheet
 
-    transactions = spendingData(csv_file_path)
+    transactions = spendingData(csv_file_path) # Getting the list of transactions from the CSV file
 
     row = 8
-    for transac in transactions:
-        temp_data = [[transac.getDate(), transac.getAmount(), transac.getCategory(), transac.getDescription()]]
-        wks.insert_rows(temp_data, row)
+    for transac in transactions: 
+        temp_data = [[transac.getDate(), transac.getAmount(), transac.getCategory(), transac.getDescription()]] # Nested list of data
+        wks.insert_rows(temp_data, row) # Adding the data into row 8 and down
 
-        if transac.getCategory() == "Income":
+        if transac.getCategory() == "Income": # Color green if incone or red if expense
             wks.format(f"B{row}", {"backgroundColor": {"red": 0.0, "green": 1.0, "blue": 0.0}})
         else:
             wks.format(f"B{row}", {"backgroundColor": {"red": 1.0, "green": 0.0, "blue": 0.0}})

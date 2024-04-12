@@ -1,6 +1,18 @@
 #Class for transaction object
 
-class Transaction():
+class Transaction(): 
+    """A object made to represent a transaction from a bank statement csv
+
+        Attributes:
+            date (str): The date of the transaction
+            ammount (float): The ammount of the transaction
+            category (str): The category of the transaction
+            description (str): The description of the transaction
+            type (str): The type of the transaction
+
+        Methods:
+            getter methods for each attribute
+    """
 
     def __init__(self, date, ammount, category, description, type=""):
 
