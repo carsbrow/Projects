@@ -1,3 +1,0 @@
-function myFunction() {
-  // pull test
-}
